@@ -43,20 +43,29 @@ def file_explore(): #met dit stukje pragtige code (waar ik erg trots op ben) kan
             pass
     print(lijste)
 
-def overhoren(bestandsnaam): #hier me overhoor ik de woorden lijst aan de user
-    with open(bestandsnaam) as f:
-        bestandsdata = f.read().split(DELIMiTER)
-        for item in bestandsdata:
-            if not item == '':
-                woord1, woord2 = item.split(SCHEIDER)
-                print_header()
-                print(woord1)
-                if (input("wat is het vertalde woord: ")) == woord2:
-                    print("goedzo")
-                else:
-                    print("sorry fout")
+def overhoren(): #hier me overhoor ik de woorden lijst aan de user
+    # woordenlijst = {}
+    # with open(bestandsnaam) as f:
+    #     bestandsdata = f.read().split(DELIMiTER)
+    #     for item in bestandsdata:
+    #         if not item == '':
+    #             woord1, woord2 = item.split(SCHEIDER)
+    #             print_header()
+    #             print(woord1)
+    #             if (input("wat is het vertalde woord: ")) == woord2:
+    #                 print("goedzo")
+    #             else:
+    #                 print("sorry fout")
+    for key, value in woordenlijst_make(GEKOZEBESTAND).items():
+        print_header()
+        print(key)
+        if (input("wat is het vertalde woord: ")) == value:
+            print("goedzo")
+        else:
+            print("sorry fout")
 
 def woordenlijst_make(bestandsnaam):    #hiermee zet ik de inhoud van het bestand in een dictionary
+    woordenlijst = {}
     with open(bestandsnaam) as f:
         bestandsdata = f.read().split(DELIMiTER)
         for item in bestandsdata:
@@ -65,6 +74,7 @@ def woordenlijst_make(bestandsnaam):    #hiermee zet ik de inhoud van het bestan
                 # print(woord1)
                 # print(woord2)
                 woordenlijst[woord1] = woord2
+    f.close()
     return woordenlijst
 
 
@@ -185,7 +195,7 @@ def main(): #hier gebeurd alles
             else:
                 print("sorry deze leter staat niet in de lijst")
         elif geprint == OVERHOREN:  #hiermee overhoor ik
-            overhoren(GEKOZEBESTAND)
+            overhoren()
         elif geprint == KIES_LIJST: #hiermee kies ik een lijst
             kies_lijst()
         elif geprint == TOEVOEGEN:  #hiermee voeg ik een word toe aan het bestand
@@ -203,12 +213,5 @@ def main(): #hier gebeurd alles
 
 
 main()
-
-
-'''
-todo
-
-    fouten regelen in overhoooren
-'''
 
 
