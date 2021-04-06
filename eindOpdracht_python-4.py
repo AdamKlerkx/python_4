@@ -1,5 +1,4 @@
 import os           #hier heb ik ale variabele neergezet
-woordenlijst = {}
 DELETE = 'd'
 KIES_LIJST = 'k'
 MAX_WOORDLENGTE = 40
@@ -12,14 +11,9 @@ SCHERMHOOGTE = 40
 STANDAARD_LIJST = 'EN-NED'
 STOPPEN = 'q'
 TOEVOEGEN = 't'
-GEKOZEBESTAND = "test_bestand.txt"
 CONTROLS_VERANDEREN = 'c'
 KIJKEN = "l"
 DELIMiTER = ";"
-fouten = 0
-nieuwe_bestand = ""
-naar_wat_input = ""
-verander_input = ""
 
 
 def clear_screen():         #clear schreen
@@ -144,7 +138,8 @@ def controls_veranden():    #hier mee print ik het menu overniew maar deze keer 
 def nieuwe_lijst(): #hiermee maak ik een nieuwe lijst aan
     naarwat = input("hoe wil je het bestand noemen, het moet een naam zijn van een bestand die nog niet bestaat: ")
     hoe_veel = input("hoe veel woorden wil je toevoegen? ")
-    f = open(naarwat + ".txt", "w")
+    bestandsnaam = naarwat + ".txt"
+    f = open(bestandsnaam, "w")
     for i in range(int(hoe_veel)):
         inhoud = input("wat is het word dat getest word: ")
         inhoud2 = input("wat is de vertaling daarvan: ")
@@ -154,16 +149,24 @@ def nieuwe_lijst(): #hiermee maak ik een nieuwe lijst aan
     f.close()
 
 def kies_lijst(): #hier kies ik de nieuwe lijst
-    while True:
+    # while True:
+#     #     file_explore()
+#     #     nieuwe_bestand = input("kies je bestands naam tussen deze bestanden: ")
+#     #     nieuwe_bestand = (nieuwe_bestand) + ".txt"
+#     #     if input("is " + nieuwe_bestand + " het bestand die jij hebt gekoze? ") == "ja":
+#     #         GEKOZEBESTAND = nieuwe_bestand
+#     #         print(GEKOZEBESTAND)
+#     #         break
+#     #     else:
+#     #         pass
+    bestand_correct = False
+    while not bestand_correct:
         file_explore()
         nieuwe_bestand = input("kies je bestands naam tussen deze bestanden: ")
         nieuwe_bestand = (nieuwe_bestand) + ".txt"
         if input("is " + nieuwe_bestand + " het bestand die jij hebt gekoze? ") == "ja":
-            GEKOZEBESTAND = nieuwe_bestand
-            print(GEKOZEBESTAND)
-            break
-        else:
-            pass
+            bestand_correct = True
+    return nieuwe_bestand
 
 def main(): #hier gebeurd alles
     global STOPPEN
@@ -174,7 +177,7 @@ def main(): #hier gebeurd alles
     global DELETE
     global KIJKEN
     clear_screen()
-    GEKOZEBESTAND = "test_bestand.txt"
+    gekozenbestand = "test_bestand.txt"
     while (geprint := print_menu()) != STOPPEN: #een while loop die stopt als geprint "p" is
         if geprint == CONTROLS_VERANDEREN:  #hiermee verander ik de controls
             verander_input, naar_wat_input = controls_veranden()
@@ -197,14 +200,14 @@ def main(): #hier gebeurd alles
         elif geprint == OVERHOREN:  #hiermee overhoor ik
             overhoren()
         elif geprint == KIES_LIJST: #hiermee kies ik een lijst
-            kies_lijst()
+            gekozenbestand = kies_lijst()
         elif geprint == TOEVOEGEN:  #hiermee voeg ik een word toe aan het bestand
-            woord_toevoegen(GEKOZEBESTAND)
+            woord_toevoegen(gekozenbestand)
             print("dus you woorden lijst ziet er nu zo uit: " + str(woordenlijst))
         elif geprint == DELETE: #hiermee verwijder ik een woord uit de lijst
-            woord_weghalen(GEKOZEBESTAND)
+            woord_weghalen(gekozenbestand)
         elif geprint == KIJKEN: #hiermee kan de user kijken wat er in de lijst staat
-            print("zo ziet jou geseleckteerde bestand er uit: " + str(woordenlijst_make(GEKOZEBESTAND)))
+            print("zo ziet jou geseleckteerde bestand er uit: " + str(woordenlijst_make(gekozenbestand)))
         elif geprint == NIEUWE_LIJST: #hiermee maak ik een nieuwe lijst
             nieuwe_lijst()
         else:   #als de input van de user in geen een van deze if's past dan komt hij bij dit berigt uit
@@ -213,5 +216,3 @@ def main(): #hier gebeurd alles
 
 
 main()
-
-
