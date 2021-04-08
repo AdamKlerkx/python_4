@@ -1,4 +1,4 @@
-import os           #hier heb ik ale variabele neergezet
+import os           #hier heb ik ale globale variabele neergezet
 DELETE = 'd'
 KIES_LIJST = 'k'
 MAX_WOORDLENGTE = 40
@@ -37,7 +37,7 @@ def file_explore(): #met dit stukje pragtige code (waar ik erg trots op ben) kan
             pass
     print(lijste)
 
-def overhoren(): #hier me overhoor ik de woorden lijst aan de user
+def overhoren(gekozenbestand): #hier me overhoor ik de woorden lijst aan de user
     # woordenlijst = {}
     # with open(bestandsnaam) as f:
     #     bestandsdata = f.read().split(DELIMiTER)
@@ -50,7 +50,7 @@ def overhoren(): #hier me overhoor ik de woorden lijst aan de user
     #                 print("goedzo")
     #             else:
     #                 print("sorry fout")
-    for key, value in woordenlijst_make(GEKOZEBESTAND).items():
+    for key, value in woordenlijst_make(gekozenbestand).items():
         print_header()
         print(key)
         if (input("wat is het vertalde woord: ")) == value:
@@ -198,7 +198,7 @@ def main(): #hier gebeurd alles
             else:
                 print("sorry deze leter staat niet in de lijst")
         elif geprint == OVERHOREN:  #hiermee overhoor ik
-            overhoren()
+            overhoren(gekozenbestand)
         elif geprint == KIES_LIJST: #hiermee kies ik een lijst
             gekozenbestand = kies_lijst()
         elif geprint == TOEVOEGEN:  #hiermee voeg ik een word toe aan het bestand
