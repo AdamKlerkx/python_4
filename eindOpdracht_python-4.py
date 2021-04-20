@@ -203,7 +203,7 @@ def main(): #hier gebeurd alles
             gekozenbestand = kies_lijst()
         elif geprint == TOEVOEGEN:  #hiermee voeg ik een word toe aan het bestand
             woord_toevoegen(gekozenbestand)
-            print("dus you woorden lijst ziet er nu zo uit: " + str(woordenlijst))
+            print("dus you woorden lijst ziet er nu zo uit: " + str(woordenlijst_make(gekozenbestand)))
         elif geprint == DELETE: #hiermee verwijder ik een woord uit de lijst
             woord_weghalen(gekozenbestand)
         elif geprint == KIJKEN: #hiermee kan de user kijken wat er in de lijst staat
