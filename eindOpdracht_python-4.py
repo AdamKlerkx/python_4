@@ -26,30 +26,15 @@ def compile(woord1,woord2): #hier compile ik twee worden in een formaat die in h
 def file_explore(): #met dit stukje pragtige code (waar ik erg trots op ben) kan ik uit het documend waar je nu in zit alle .txt bestanden filteren en de .txt er af haalen zodat het voor de user te lezen is
     file = os.listdir()
     lijste = ""
-    # print(file)
-    # clear_screen()
     for word in file:
         if ".txt" in word:
             word = word.replace(".txt", "")
             lijste += word + ", "
-            # print(word)
         else:
             pass
     print(lijste)
 
 def overhoren(gekozenbestand): #hier me overhoor ik de woorden lijst aan de user
-    # woordenlijst = {}
-    # with open(bestandsnaam) as f:
-    #     bestandsdata = f.read().split(DELIMiTER)
-    #     for item in bestandsdata:
-    #         if not item == '':
-    #             woord1, woord2 = item.split(SCHEIDER)
-    #             print_header()
-    #             print(woord1)
-    #             if (input("wat is het vertalde woord: ")) == woord2:
-    #                 print("goedzo")
-    #             else:
-    #                 print("sorry fout")
     for key, value in woordenlijst_make(gekozenbestand).items():
         print_header()
         print(key)
@@ -65,8 +50,6 @@ def woordenlijst_make(bestandsnaam):    #hiermee zet ik de inhoud van het bestan
         for item in bestandsdata:
             if not item == '':
                 woord1, woord2 = item.split(SCHEIDER)
-                # print(woord1)
-                # print(woord2)
                 woordenlijst[woord1] = woord2
     f.close()
     return woordenlijst
@@ -96,7 +79,6 @@ def woord_toevoegen(gekozenbestand):    #hier mee voeg ik een woord toe aan het 
     toegevoegt1 = input("wat is het eerste woord: ")
     toegevoegt2 = input("wat is het tweede woord: ")
     f = open(gekozenbestand, 'a')
-    # f.write(toegevoegt1 + SCHEIDER + toegevoegt2 + DELIMiTER)
     f.write(compile(toegevoegt1,toegevoegt2))
     woordenlijst = woordenlijst_make(gekozenbestand)
     return woordenlijst
@@ -111,7 +93,6 @@ def woord_weghalen(gekozenbestand): #met dit mooie stukje code haal ik een woord
             if welke_key == key:
                 pass
             else:
-                # nieuwe_lijst += key + SCHEIDER + value + DELIMiTER
                 nieuwe_lijst += compile(key,value)
         print(nieuwe_lijst)
         f = open(gekozenbestand, "w")
@@ -143,22 +124,11 @@ def nieuwe_lijst(): #hiermee maak ik een nieuwe lijst aan
     for i in range(int(hoe_veel)):
         inhoud = input("wat is het word dat getest word: ")
         inhoud2 = input("wat is de vertaling daarvan: ")
-        # compilen = inhoud + SCHEIDER + inhoud2 + DELIMiTER
         compilen = compile(inhoud,inhoud2)
         f.write(compilen)
     f.close()
 
 def kies_lijst(): #hier kies ik de nieuwe lijst
-    # while True:
-#     #     file_explore()
-#     #     nieuwe_bestand = input("kies je bestands naam tussen deze bestanden: ")
-#     #     nieuwe_bestand = (nieuwe_bestand) + ".txt"
-#     #     if input("is " + nieuwe_bestand + " het bestand die jij hebt gekoze? ") == "ja":
-#     #         GEKOZEBESTAND = nieuwe_bestand
-#     #         print(GEKOZEBESTAND)
-#     #         break
-#     #     else:
-#     #         pass
     bestand_correct = False
     while not bestand_correct:
         file_explore()
